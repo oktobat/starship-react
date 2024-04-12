@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components'
+import cn from 'classnames'
 
 const ArtistSectionBlock = styled.div`
     h3 {
@@ -15,6 +16,11 @@ const ArtistSectionBlock = styled.div`
             margin: 20px;
             padding: 10px;
             border-radius: 10px;
+            backgrond:#ddd;
+            &.on {
+                background:#f00;
+                color:#fff
+            }
           }
         }
     }
@@ -22,28 +28,23 @@ const ArtistSectionBlock = styled.div`
 
 const ArtistSection = () => {
 
-    const [active, setActive] = useState("팝 (Pop)")
+    const [active, setActive] = useState(0)
 
-    const artistMenu = {
-        menu1: '팝 (Pop)',
-        menu2: '발라드 (Ballad)',
-        menu3: '힙합 (Hip-hop)',
-        menu4: '알앤비 (R&B)'
-      }
-
-      const onChange = (value)=>{
-        setActive(value)
-      }
+    const artistMenu = [
+        {id:0, menu: '팝 (Pop)'         },
+        {id:1, menu: '발라드 (Ballad)'  },
+        {id:2, menu: '힙합 (Hip-hop)'   },
+        {id:3, menu: '알앤비 (R&B)'     }
+    ]
 
     return (
         <ArtistSectionBlock>
-            <h3>탭 제목</h3>
+            <h3>{ artistMenu[active].menu }</h3>
             <div className="artist__wrap">
                 <div className="artist__type">
-                    <button onClick={()=>{ onChange(artistMenu.menu1) }} style={{ background: active===artistMenu.menu1 ? '#f00' : '#ddd', color: active===artistMenu.menu1 ? '#fff' : '#000' }}>{artistMenu.menu1}</button>
-                    <button onClick={()=>{ onChange(artistMenu.menu2) }} style={{ background: active===artistMenu.menu2 ? '#f00' : '#ddd', color: active===artistMenu.menu2 ? '#fff' : '#000' }}>{artistMenu.menu2}</button>
-                    <button onClick={()=>{ onChange(artistMenu.menu3) }} style={{ background: active===artistMenu.menu3 ? '#f00' : '#ddd', color: active===artistMenu.menu3 ? '#fff' : '#000' }}>{artistMenu.menu3}</button>
-                    <button onClick={()=>{ onChange(artistMenu.menu4) }} style={{ background: active===artistMenu.menu4 ? '#f00' : '#ddd', color: active===artistMenu.menu4 ? '#fff' : '#000' }}>{artistMenu.menu4}</button>
+                    {
+                        artistMenu.map((item, index)=><button key={index} onClick={()=>{setActive(item.id)}} className={cn({ on:active===item.id })}>{item.menu}</button>)
+                    }
                 </div>
             </div>
         </ArtistSectionBlock>

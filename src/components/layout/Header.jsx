@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 const HeaderBlock = styled.div`
   text-align: center;
@@ -26,7 +26,7 @@ const HeaderBlock = styled.div`
       justify-content: space-around;
       li { margin: 10px 0px; font-size: 20px;
         a { transition: all 0.5s;
-          &:hover { color: #f00; }
+          &:hover, &.active { color: #f00; }
         }
       }
     }
@@ -43,22 +43,22 @@ const Header = () => {
             <nav id="header__nav">
                 <ul>
                     <li>
-                        <Link to="/artist">Artist</Link>
+                        <NavLink to="/artist">Artist</NavLink>
                     </li>
                     <li>
-                        <Link to="/actor">Actor</Link>
+                        <NavLink to="/actor">Actor</NavLink>
                     </li>
                     <li>
-                        <Link to="/">Movie</Link>
+                        <NavLink to="/">Movie</NavLink>
                     </li>
                     <li>
-                        <Link to="/">Theater</Link>
+                        <NavLink to="/">Theater</NavLink>
                     </li>
                     <li>
-                        <Link to="/">Product</Link>
+                        <NavLink to="/">Product</NavLink>
                     </li>
                     <li>
-                        <Link to="/">Community</Link>
+                        <NavLink to="/">Community</NavLink>
                     </li>
                 </ul>
             </nav>
