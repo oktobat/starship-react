@@ -39,6 +39,27 @@ const MovieView = () => {
 
     const [movies, setMovies] = useState([])
 
+    const [name, setName] = useState("인기 영화")
+
+    const onSearch = (subject)=>{
+        axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${id}&language=ko-KR&query=${subject}&page=${1}`)
+        .then(response=>{
+            console.log(response.data)
+            setMovies(response.data.results)
+            setName("")
+        })
+    }
+
+    const onClick = (payload)=>{
+        let {name, media, type} = payload
+        axios.get(`https://api.themoviedb.org/3/${media}/${type}?api_key=${id}&language=ko-KR&page=${1}`)
+        .then(response=>{
+            console.log(response.data)
+            setName(name)
+            setMovies(response.data.results)
+        })
+    }
+
     const firstData = ()=>{
         axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${id}&language=ko-KR&page=1`)
         .then(response=>{
@@ -54,8 +75,8 @@ const MovieView = () => {
     return (
         <MovieViewBlock>
             <Title title="Movie" />
-            <MovieSearch />
-            <MovieTag />
+            <MovieSearch onSearch={onSearch} />
+            <MovieTag onClick={onClick} name={name} />
             <MovieSection movies={movies} />
         </MovieViewBlock>
     );

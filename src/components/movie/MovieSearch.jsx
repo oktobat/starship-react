@@ -19,12 +19,14 @@ const MovieSearchBlock = styled.div`
 
 `
 
-const MovieSearch = () => {
+const MovieSearch = ({onSearch}) => {
     const [text, setText] = useState("")
     const onSubmit = (e)=>{
         e.preventDefault()
-        onSearch(text, "search")
-        setText("")
+        if (text) {
+            onSearch(text)
+            setText("")
+        }
     }
     const onChange = (e)=>{
         setText(e.target.value)
