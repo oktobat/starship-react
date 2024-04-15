@@ -49,7 +49,7 @@ const Header = () => {
                         <NavLink to="/actor">Actor</NavLink>
                     </li>
                     <li>
-                        <NavLink to="/">Movie</NavLink>
+                        <NavLink to="/movie">Movie</NavLink>
                     </li>
                     <li>
                         <NavLink to="/">Theater</NavLink>
