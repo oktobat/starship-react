@@ -7,13 +7,15 @@ const PaginationBlock = styled.div`
     .goend { background:#000; color:#fff; padding:5px 10px; margin:0 5px;
         &:disabled { background:#999 }
     }
-    span { 
-        button { background:#ddd; margin:0 2px; 
-           border-radius:2px; width:30px; height:20px; 
-           &.on { background:#f00; color:#fff }
-        }
+`
+
+const PageBlock = styled.span`
+    button { background:#ddd; margin:0 2px; 
+        border-radius:2px; width:30px; height:20px; 
+        &.on { background:#f00; color:#fff }
     }
 `
+
 
 const Pagination = ({currentPage, totalItems, itemsPerPage, changeType, onClick, onSearch, keyword}) => {
 
@@ -53,13 +55,13 @@ const Pagination = ({currentPage, totalItems, itemsPerPage, changeType, onClick,
     return (
         <PaginationBlock>
             <button onClick={prevPage} className="goend" disabled={currentPage==1}>이전</button>
-            <span>
+            <PageBlock>
                 {
                     pageList.map(page=>(
                         <button onClick={()=>goToPage(page)} key={page} type="button" className={currentPage==page && "on"}>{page}</button>
                     ))
                 }
-            </span>
+            </PageBlock>
             <button onClick={nextPage} className="goend" disabled={currentPage == pageList.length}>다음</button>
         </PaginationBlock>
     );
