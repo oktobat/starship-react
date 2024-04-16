@@ -19,7 +19,7 @@ button {
 }
 `
 
-const MovieTag = ({onClick, name}) => {
+const MovieTag = ({onClick, changeType}) => {
     const movieType = [
         { name: '인기 영화',        media: 'movie',     type: 'popular' },
         { name: '현재 상영',        media: 'movie',     type: 'now_playing' },
@@ -33,7 +33,7 @@ const MovieTag = ({onClick, name}) => {
         <MovieTagBlock>
             {
                 movieType.map((item, index)=>(
-                    <button key={index} type="button" onClick={()=>onClick({name:item.name, media:item.media, type:item.type})} className={name==item.name && 'on'}>{item.name}</button>
+                    <button key={index} type="button" onClick={()=>onClick({name:item.name, media:item.media, type:item.type}, 1)} className={changeType.name==item.name && 'on'}>{item.name}</button>
                 ))
             }
         </MovieTagBlock>

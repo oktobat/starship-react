@@ -6,6 +6,7 @@ const FooterBlock = styled.div`
     background: #000;
     color: #fff;
     padding: 50px;
+    margin-top:50px; 
     .footer__nav {
         border-bottom: 1px solid #fff;
         padding-bottom: 20px;
