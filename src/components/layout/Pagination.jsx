@@ -15,7 +15,7 @@ const PaginationBlock = styled.div`
     }
 `
 
-const Pagination = ({currentPage, totalItems, itemsPerPage, changeType, onClick}) => {
+const Pagination = ({currentPage, totalItems, itemsPerPage, changeType, onClick, onSearch, keyword}) => {
 
     const pageList = [];
     const totalPages = Math.ceil(totalItems / itemsPerPage);
@@ -27,15 +27,27 @@ const Pagination = ({currentPage, totalItems, itemsPerPage, changeType, onClick}
     }
 
     const prevPage = ()=>{
-        onClick(changeType, currentPage-1)
+        if (!keyword) {
+            onClick(changeType, currentPage-1)
+        } else {
+            onSearch(keyword, currentPage-1)
+        }
     }
 
     const nextPage = ()=>{
-        onClick(changeType, currentPage+1)
+        if (!keyword){
+            onClick(changeType, currentPage+1)
+        } else {
+            onSearch(keyword, currentPage+1)
+        }
     }
 
     const goToPage = (pageNum)=>{
-        onClick(changeType, pageNum)
+        if (!keyword) {
+            onClick(changeType, pageNum)
+        } else {
+            onSearch(keyword, pageNum)
+        }
     }
 
     return (

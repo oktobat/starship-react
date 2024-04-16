@@ -24,7 +24,7 @@ const MovieSearch = ({onSearch}) => {
     const onSubmit = (e)=>{
         e.preventDefault()
         if (text) {
-            onSearch(text)
+            onSearch(text, 1)
             setText("")
         }
     }
