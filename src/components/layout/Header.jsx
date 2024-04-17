@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components'
 import { Link, NavLink } from 'react-router-dom'
+import { BsCartPlusFill  } from "react-icons/bs";
+import { useSelector } from 'react-redux';
 
 const HeaderBlock = styled.div`
   text-align: center;
@@ -34,12 +36,42 @@ const HeaderBlock = styled.div`
   }
 `
 
+const ItemCount = styled.div`
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 30px;
+  color: blue;
+  span {
+    position: absolute;
+    top: -2px;
+    right: -5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: red;
+    color: #fff;
+    font-size: 12px;
+    line-height: 20px;
+    text-align: center;
+    font-weight: bold;
+  }
+`
+
 const Header = () => {
+    const carts = useSelector(state=>state.products.carts)
+
     return (
         <HeaderBlock>
             <h1 className="header__logo">
                 <Link to="/">STARSHIP SQUARE</Link>
             </h1>
+            <ItemCount>
+              <a href="#">
+                <BsCartPlusFill />
+                <span>{ carts.length }</span> 
+              </a>
+            </ItemCount>
             <nav id="header__nav">
                 <ul>
                     <li>

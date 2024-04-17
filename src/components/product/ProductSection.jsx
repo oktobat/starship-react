@@ -1,5 +1,6 @@
 import React, {useState, useRef, useEffect} from 'react';
-import axios from 'axios';
+import { fetchProducts, addToCart } from '@/store/product'
+import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components'
 import { BsCartPlusFill, BsCartPlus  } from "react-icons/bs";
 import { ImSpinner } from "react-icons/im";
@@ -39,6 +40,10 @@ const ButtonBlock = styled.div`
 `
 
 const ProductSection = ({title}) => {
+    const dispatch = useDispatch();
+
+    const carts = useSelector(state=>state.products.carts)
+
 
     const sortType = [
         { type:'title', text:'상품명순'},
@@ -49,8 +54,8 @@ const ProductSection = ({title}) => {
 
     const [loading, setLoading] = useState(false)
 
-    let allData = useRef(null)
-    const [products, setProducts] = useState(allData.current)
+    const allData = useSelector(state=>state.products.products)
+    const [products, setProducts] = useState(allData)
 
     const sortFlag = useRef(false)
 
@@ -69,20 +74,29 @@ const ProductSection = ({title}) => {
         sortFlag.current = !sortFlag.current
     }
 
+    const cartIdCount = (id) => {
+        let item = carts.find(value=>value.id==id)
+        if (item) {
+            return item.qty
+        } else {
+            return 0
+        }
+    }
 
     useEffect(()=>{
-        axios.get('./assets/data/products.json')
-        .then(response=>{
-            console.log(response.data)
-            allData.current = response.data
+        dispatch(fetchProducts())
+    }, [])
+
+    useEffect(()=>{
+        if (allData.length>0) {
             setLoading(true)
             if (title=='all') {
-                setProducts(allData.current)
+                setProducts(allData)
             } else {
-                setProducts(allData.current.filter((item)=>item.category==title))
+                setProducts(allData.filter((item)=>item.category==title))
             }
-        })
-    }, [title])
+        }
+    }, [allData, title])
 
     if (!loading) {
         return (
@@ -115,12 +129,12 @@ const ProductSection = ({title}) => {
                                 <p className="rating">
                                     {
                                         Array.from({length:5}).map((_, index)=>(
-                                            (index+1)<=item.rating ? <span>★</span> : <span>☆</span>
+                                            (index+1)<=item.rating ? <span key={index}>★</span> : <span key={index}>☆</span>
                                         ))
                                     }
                                 </p>
-                                { item.inventory>0 ? <button><BsCartPlusFill /></button> : <button><BsCartPlus /></button> }
-                                { item.inventory>0 ? <span>{ item.inventory }개 남았습니다.</span> : <span>품절!!</span>}
+                                { item.inventory!=cartIdCount(item.id) ? <button onClick={ ()=>dispatch(addToCart(item.id)) }><BsCartPlusFill /></button> : <button><BsCartPlus /></button> }
+                                { item.inventory!=cartIdCount(item.id) ? <span>{ item.inventory - cartIdCount(item.id) }개 남았습니다.</span> : <span>품절!!</span>}
                             </div>
                         </ListBlock>
                     ))
