@@ -4,8 +4,8 @@ import axios from 'axios'
 const productSlice = createSlice({
     name:"products",
     initialState : {
-        products : [],
-        carts: []
+        products : [],  // { "category":"woman", "id":1001, "title":"여성의류1", "price":437500, "rating":5, "description":"여성의류1 요약설명은 <strong>중요</strong>합니다.", "inventory":10, "image":"./assets/image/0010050001972.jpg" },
+        carts: []       // { id:id, qty:3}
     },
     reducers : {
         initProducts(state, action){

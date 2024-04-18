@@ -67,10 +67,10 @@ const Header = () => {
                 <Link to="/">STARSHIP SQUARE</Link>
             </h1>
             <ItemCount>
-              <a href="#">
+              <Link to="/cart">
                 <BsCartPlusFill />
                 <span>{ carts.length }</span> 
-              </a>
+              </Link>
             </ItemCount>
             <nav id="header__nav">
                 <ul>
