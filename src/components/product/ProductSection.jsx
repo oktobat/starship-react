@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components'
 import { BsCartPlusFill, BsCartPlus  } from "react-icons/bs";
 import { ImSpinner } from "react-icons/im";
+import { Link } from 'react-router-dom'
 
 const ProductSectionBlock = styled.div``
 
@@ -121,7 +122,7 @@ const ProductSection = ({title}) => {
                     products.map((item, index)=>(
                         <ListBlock key={index}>
                             <div className="photo">
-                                <img src={item.image} alt={item.title} />
+                                <Link to={`/product/${item.title}`} state={{ item : item }}><img src={item.image} alt={item.title} /></Link>
                             </div>
                             <div className="info">
                                 <p><a href="#">{item.title}</a></p>

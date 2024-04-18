@@ -7,6 +7,7 @@ import ArtistView from '@/views/ArtistView'
 import MovieView from '@/views/MovieView'
 import TheaterView from '@/views/TheaterView'
 import ProductView from '@/views/ProductView'
+import ProductDetailView from '@/views/ProductDetailView'
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         <Route path="/movie" element={ <MovieView />} />
         <Route path="/theater" element={ <TheaterView />} />
         <Route path="/product" element={ <ProductView />} />
+        <Route path="/product/:id" element={ <ProductDetailView />} />
       </Route>
     </Routes>
   );
