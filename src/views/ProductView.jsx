@@ -11,7 +11,7 @@ const ProductView = () => {
     }
 
     return (
-        <div>
+        <div className="row">
             <Title title="Product" />
             <ProductCategory changeTitle={changeTitle} title={title} />
             <ProductSection title={title} />

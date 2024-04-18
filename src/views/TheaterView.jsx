@@ -6,7 +6,7 @@ import TheaterSection from '@/components/theater/TheaterSection'
 const TheaterViewBlock = styled.div``
 const TheaterView = () => {
     return (
-        <TheaterViewBlock>
+        <TheaterViewBlock  className="row">
             <Title title="Theater" />
             <TheaterSection />
         </TheaterViewBlock>

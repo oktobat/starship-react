@@ -107,43 +107,42 @@ const ProductSection = ({title}) => {
                 </LoadingBlock>
            </ProductSectionBlock>
         );
-    } else {
-        return (
-            <ProductSectionBlock>
-                <ButtonBlock>
-                    {
-                        sortType.map((item, index)=>(
-                            <button key={index} onClick={()=>{setChangeSort(item.type); sortProduct(item.type)}} className={ changeSort==item.type && "on" }>{item.text}</button>
-                        ))
-                    }
-                </ButtonBlock>
-                <UlBlock>
+    } 
+    return (
+        <ProductSectionBlock>
+            <ButtonBlock>
                 {
-                    products.map((item, index)=>(
-                        <ListBlock key={index}>
-                            <div className="photo">
-                                <Link to={`/product/${item.title}`} state={{ item : item }}><img src={item.image} alt={item.title} /></Link>
-                            </div>
-                            <div className="info">
-                                <p><a href="#">{item.title}</a></p>
-                                <p>{item.price.toLocaleString()}</p>
-                                <p className="rating">
-                                    {
-                                        Array.from({length:5}).map((_, index)=>(
-                                            (index+1)<=item.rating ? <span key={index}>★</span> : <span key={index}>☆</span>
-                                        ))
-                                    }
-                                </p>
-                                { item.inventory!=cartIdCount(item.id) ? <button onClick={ ()=>dispatch(addToCart(item.id)) }><BsCartPlusFill /></button> : <button><BsCartPlus /></button> }
-                                { item.inventory!=cartIdCount(item.id) ? <span>{ item.inventory - cartIdCount(item.id) }개 남았습니다.</span> : <span>품절!!</span>}
-                            </div>
-                        </ListBlock>
+                    sortType.map((item, index)=>(
+                        <button key={index} onClick={()=>{setChangeSort(item.type); sortProduct(item.type)}} className={ changeSort==item.type && "on" }>{item.text}</button>
                     ))
                 }
-                </UlBlock>
-            </ProductSectionBlock>
-        );
-    }
+            </ButtonBlock>
+            <UlBlock>
+            {
+                products.map((item, index)=>(
+                    <ListBlock key={index}>
+                        <div className="photo">
+                            <Link to={`/product/${item.title}`} state={{ item : item }}><img src={item.image} alt={item.title} /></Link>
+                        </div>
+                        <div className="info">
+                            <p><a href="#">{item.title}</a></p>
+                            <p>{item.price.toLocaleString()}</p>
+                            <p className="rating">
+                                {
+                                    Array.from({length:5}).map((_, index)=>(
+                                        (index+1)<=item.rating ? <span key={index}>★</span> : <span key={index}>☆</span>
+                                    ))
+                                }
+                            </p>
+                            { item.inventory!=cartIdCount(item.id) ? <button onClick={ ()=>dispatch(addToCart(item.id)) }><BsCartPlusFill /></button> : <button><BsCartPlus /></button> }
+                            { item.inventory!=cartIdCount(item.id) ? <span>{ item.inventory - cartIdCount(item.id) }개 남았습니다.</span> : <span>품절!!</span>}
+                        </div>
+                    </ListBlock>
+                ))
+            }
+            </UlBlock>
+        </ProductSectionBlock>
+    );
 };
 
 export default ProductSection;

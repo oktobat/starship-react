@@ -86,7 +86,7 @@ const ActorView = () => {
     }
 
     return (
-        <ActorViewBlock>
+        <ActorViewBlock className="row">
             <Title title="Actor" />
             <ActorSearch onSearch={onSearch} />
             <ActorTag onSearch={onSearch} name={name} />

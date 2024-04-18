@@ -7,7 +7,7 @@ const ArtistViewBlock = styled.div``
 
 const ArtistView = () => {
     return (
-        <ArtistViewBlock>
+        <ArtistViewBlock className="row">
             <Title title="Artist" />
             <ArtistSection />
         </ArtistViewBlock>

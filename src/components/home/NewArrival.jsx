@@ -118,7 +118,7 @@ const NewArrival = () => {
       ]
 
     return (
-        <NewArrivalBlock>
+        <NewArrivalBlock  className="row">
             <h2>New Arrival</h2>
             <ul>
                 { products.map((item, index)=><NewArrivalList item={item} key={index} />) }

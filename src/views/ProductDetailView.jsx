@@ -6,7 +6,7 @@ const ProductDetailView = () => {
     const location = useLocation()
     const { item } = location.state
     return (
-        <ProductDetailSection product={item} />
+        <ProductDetailSection product={item}  className="row" />
     );
 };
 

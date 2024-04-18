@@ -66,7 +66,7 @@ const MovieView = () => {
     }, [])
 
     return (
-        <MovieViewBlock>
+        <MovieViewBlock className="row">
             <Title title="Movie" />
             <MovieSearch onSearch={onSearch} />
             <MovieTag onClick={onClick} changeType={changeType} />
