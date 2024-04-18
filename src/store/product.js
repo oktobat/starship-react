@@ -19,11 +19,25 @@ const productSlice = createSlice({
             } else {
                 state.carts.push({ id:action.payload, qty:1})
             }
+        },
+        qtyUpdate(state, action){
+           let {id, newQty} = action.payload
+           let cartItem = state.carts.find(item=>item.id==id)
+           console.log(cartItem)
+           if (cartItem) {
+                cartItem.qty = newQty
+           }
+            //  let newCart = state.carts.map(item=>item.id==id ? {...item, qty:newQty} : item )
+            //  state.carts = newCart
+        },
+        removeCartItem(state, action){
+            let id = action.payload
+            state.carts = state.carts.filter(item=>item.id!==id)
         }
     }
 })
 
-export const { initProducts, addToCart } = productSlice.actions;
+export const { initProducts, addToCart, qtyUpdate, removeCartItem } = productSlice.actions;
 
 export const fetchProducts = ()=> async dispatch => {
     try {
